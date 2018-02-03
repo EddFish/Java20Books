@@ -1,6 +1,7 @@
 package telran.books.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,26 +21,31 @@ public class BooksHandler {
 	IBooks books;
 
 	@PostMapping(IBookConstants.BOOK)
+	@CrossOrigin
 	public boolean addBook(@RequestBody Book book) {
 		return books.addBook(book);
 	}
 
 	@GetMapping({ IBookConstants.BOOK + "/{isbn}" })
+	@CrossOrigin
 	public Book getBook(@PathVariable long isbn) {
 		return books.getBookByIsbn(isbn);
 	}
 
 	@DeleteMapping({ IBookConstants.BOOK + "/{isbn}" })
+	@CrossOrigin
 	public boolean removeBook(@PathVariable long isbn) {
 		return books.removeBook(isbn);
 	}
 
 	@GetMapping(IBookConstants.AUTHOR + "/{name}")
+	@CrossOrigin
 	public Iterable<Book> booksByAuthor(@PathVariable String name) {
 		return books.getBooksByAuthor(name);
 	}
 
 	@GetMapping(IBookConstants.PUBLISHER + "/{name}")
+	@CrossOrigin
 	public Iterable<Book> booksByPublisher(@PathVariable String name) {
 		return books.getBooksByPublisher(name);
 	}
@@ -50,6 +56,7 @@ public class BooksHandler {
 	}
 
 	@GetMapping(IBookConstants.PUBLISHERS + "/{name}")
+	@CrossOrigin
 	public Iterable<Publisher> getPublishers(@PathVariable String name) {
 		return books.getPublishersByAuthor(name);
 	}
